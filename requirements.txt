@@ -1,6 +1,8 @@
 line-bot-sdk
-bs4
 flask
+flask_sqlalchemy
+PyMySQL
+bs4
 pymongo
 datetime
 pandas
