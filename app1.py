@@ -21,11 +21,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:1234567890@127.0.0
 
 db.init_app(app)
 
-# Channel Access Token
-line_bot_api = LineBotApi('channel access token')
-# Channel Secret
-handler = WebhookHandler('channel secret')
+# 必須放上自己的Channel Access Token
+line_bot_api = LineBotApi('b+sTKdho12m4+yfB4tv2/2E7Qpetf3qgOPi0cOpwwe+vQeXE3zs0K+6VKlcu0C6HkmwVchvXubrxjqJk0nRkd4n10bhs1ZQ4lG+i2YpGOnAGaIAREzxeAQf71iQELK2FnwhlgnU+0gUHdDIvhZYpzAdB04t89/1O/w1cDnyilFU=')
+# 必須放上自己的Channel Secret
+handler = WebhookHandler('203521a641695c4d7110debaf7b1ecb2')
 
+line_bot_api.push_message('U93285018abb1284972b72cd643b1ce41', TextSendMessage(text='你可以開始了'))
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
