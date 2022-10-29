@@ -40,8 +40,9 @@ def callback():
     try:
         print('call handle')
         handler.handle(body, signature)
-    except InvalidSignatureError:
+    except InvalidSignatureError as e:
         print('throw InvalidError')
+        print(e)
         abort(400)
     return 'OK'
 
@@ -53,6 +54,8 @@ def handle_message(event):
     # query_data = db.engine.execute(sql_cmd)
     # print(db.engine.execute(sql_cmd).fetchall())
     # print('#########   ', query_data.fetchone()[0])
+    message = TextSendMessage(text=event.message.text)
+    line_bot_api.reply_message(event.reply_token, message)
 
     # message = TextSendMessage(text=event.message.text + ' @查詢  ' + query_data.fetchone()[0])
     # line_bot_api.reply_message(event.reply_token, message)
