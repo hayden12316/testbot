@@ -29,6 +29,8 @@ handler = WebhookHandler('channel secret')
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
+    print('call callback()')
+    app.logger.info('logger call callback()')
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -36,8 +38,10 @@ def callback():
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
+        print('call handle')
         handler.handle(body, signature)
     except InvalidSignatureError:
+        print('throw InvalidError')
         abort(400)
     return 'OK'
 
@@ -55,5 +59,6 @@ def handle_message(event):
 
 import os
 if __name__ == "__main__":
+    print('start~~~~~~~~')
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
