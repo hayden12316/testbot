@@ -17,7 +17,7 @@ db = SQLAlchemy()
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:1234567890@127.0.0.1:3306/demo"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://sql12530467:DtkfuNPVjS@sql12.freemysqlhosting.net:3306/sql12530467"
 
 db.init_app(app)
 
@@ -50,16 +50,12 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print('jfkdjfkdjfkdjfkd')
-    # sql_cmd = """select * from emp; """
-    # query_data = db.engine.execute(sql_cmd)
+    sql_cmd = """select * from test; """
+    query_data = db.engine.execute(sql_cmd)
     # print(db.engine.execute(sql_cmd).fetchall())
     # print('#########   ', query_data.fetchone()[0])
-    message = TextSendMessage(text=event.message.text)
+    message = TextSendMessage(text=event.message.text + ' @查詢  ' + query_data.fetchone()[0])
     line_bot_api.reply_message(event.reply_token, message)
-
-    # message = TextSendMessage(text=event.message.text + ' @查詢  ' + query_data.fetchone()[0])
-    # line_bot_api.reply_message(event.reply_token, message)
 
 import os
 if __name__ == "__main__":
