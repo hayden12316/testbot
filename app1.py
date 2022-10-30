@@ -54,7 +54,7 @@ def handle_message(event):
     query_data = db.engine.execute(sql_cmd)
     # print(db.engine.execute(sql_cmd).fetchall())
     # print('#########   ', query_data.fetchone()[0])
-    message = TextSendMessage(text=event.message.text + ' 目前只有一筆資料  ' + query_data.fetchone()[0][1][2])
+    message = TextSendMessage(text=event.message.text + ' 目前只有一筆資料  ' + query_data.fetchone()[0])
     line_bot_api.reply_message(event.reply_token, message)
 
 import os
